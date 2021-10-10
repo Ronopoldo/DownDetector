@@ -12,12 +12,12 @@ client.on("ready", () => {
 
 // console.log(user.username)
     const statusMessage = new Discord.MessageEmbed()
-.setTitle("Ronoserver DownDetector заработал! Теперь, если боты будут слетать, то этот напишет сюда!")
+.setTitle("КРИТИЧЕСКАЯ ОШИБКА!!!!! ЭТОТ БОТ БЫЛ В ОТКЛЮЧКЕ!!!!")
 .setColor("#ffff00")
-.setDescription("Хей! Если вы являетесь олдом или просто хотите посмотреть закрытые каналы, то можете нажать реакцию ниже и получить роль для просмотра старых каналов.")
+.setDescription("ВНИМАНИЕ! Этот бот был отключён!!! Если Вы считаете, что этого не должно было быть, то СРОЧНО сообщите в ЛС <@544902183007813652>")
 
 .setFooter("Ronoserver Services - звено Дебага", "https://media.discordapp.net/attachments/768414683019345931/841704850139906108/9b6a4cc843e31c1e.png")
-.setThumbnail("https://media.discordapp.net/attachments/698853696817070164/896884865822261308/e3c03ddae2f4d506.png?width=667&height=669")
+.setThumbnail("https://media.discordapp.net/attachments/698853696817070164/896895090121924638/d9e8efab4c698503.png?width=779&height=670")
 
     alertChannel.send(statusMessage)
 let RonobotLastStatus = true
