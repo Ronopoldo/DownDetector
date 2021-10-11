@@ -1,3 +1,13 @@
+
+const express = require('express');
+const app = express();
+const port = 3000;
+ 
+ 
+app.get('/', function(request, response){ response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); });
+app.listen(port, () => console.log());
+
+
 //DownDetector для Роносервера
 const Discord = require("discord.js")
 const client = new Discord.Client()
@@ -5,7 +15,7 @@ const client = new Discord.Client()
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
-  const alertChannel = client.channels.cache.get('786707920326885436') //АЙДИ КАНАЛА ОПОВЕЩЕНИЙ
+  const alertChannel = client.channels.cache.get('897177098026905730') //АЙДИ КАНАЛА ОПОВЕЩЕНИЙ
 
   const guild = client.guilds.cache.get('544902879534907392')
 // let user = client.users.cache.get("54490218007813652");
