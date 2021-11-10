@@ -2,7 +2,8 @@
 const express = require('express');
 const app = express();
 const port = 3000;
- 
+const fs = require("fs");
+
  
 app.get('/', function(request, response){ response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); });
 app.listen(port, () => console.log());
@@ -41,6 +42,7 @@ let DJLastStatus1 = false
 let RSLastStatus1 = false
 
 
+const logPath = './crashlog'
 let RonobotAnswer = '✅Активен✅'
 let ZelenskyAnswer = '✅Активен✅'
 let CyalmAnswer = '✅Активен✅'
@@ -52,6 +54,10 @@ let SanitarAnswer = '📡Больше не работает📡'
 
 let StatusCountMSG = '✅На данный момент сбоев не наблюдается✅'
 let StatusColor = '#22fa05'
+
+
+
+
 
 let RonobotCounter = 0
 let DownCount = 0
@@ -77,13 +83,18 @@ let DownCount = 0
             RonobotLastStatus = false
             RonobotCounter = 0
             DownCount = DownCount + 1
+            let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
       }
 
       if ((member.user.presence.status !== 'offline') && RonobotLastStatus == false)
       {
+        RonobotAnswer = '✅Активен✅'
             RonobotLastStatus = true
             RonobotCounter = 0
             DownCount = DownCount - 1
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -98,6 +109,8 @@ let DownCount = 0
             ZelenskyAnswer = '❌Сбой❌'
             ZelenskyLastStatus = false
             DownCount = DownCount + 1
+            let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
       }
 
       if ((member.user.presence.status !== 'offline') && ZelenskyLastStatus == false)
@@ -105,6 +118,8 @@ let DownCount = 0
             ZelenskyAnswer = '✅Активен✅'
             ZelenskyLastStatus = true
             DownCount = DownCount - 1
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -118,12 +133,16 @@ let DownCount = 0
             CyalmAnswer = '❌Сбой❌'
             CyalmLastStatus = false
             DownCount = DownCount + 1
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
                       }
       if ((member.user.presence.status !== 'offline') && CyalmLastStatus == false)
       {
             CyalmAnswer = '✅Активен✅'
             CyalmLastStatus = true
             DownCount = DownCount - 1
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -137,12 +156,15 @@ let DownCount = 0
             DJAnswer = '❌Сбой❌'
             DJLastStatus = false
             DownCount = DownCount + 1
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
                 }
       if ((member.user.presence.status !== 'offline') && DJLastStatus == false)
       {
             DJAnswer = '✅Активен✅'
             DJLastStatus = true
             DownCount = DownCount - 1
+                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -153,7 +175,8 @@ let DownCount = 0
             RSManagerAnswer = '❌Сбой❌'
             RSLastStatus = false
             DownCount = DownCount + 1
-
+            let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
             console.log('ЫГГЫЫГЫ')
                 }
       if ((member.user.presence.status != 'offline') && DJLastStatus == false)
@@ -162,6 +185,7 @@ let DownCount = 0
             RSManagerAnswer = '✅Активен✅'
             RSLastStatus = true
             DownCount = DownCount - 1
+                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -180,6 +204,14 @@ let DownCount = 0
           StatusColor = '#b902fd'}
           if (DownCount == 5) {StatusCountMSG = '🪦Обнаружен сбой в работе всех сервисов (гг)🪦'
           StatusColor = '#000000'}
+
+          let crashData = fs.readFileSync(logPath, "utf8");
+          let crashDataMassive = crashData.split('\n');
+          let outputData = [crashDataMassive[crashDataMassive.length-2],crashDataMassive[crashDataMassive.length-3],crashDataMassive[crashDataMassive.length-4],crashDataMassive[crashDataMassive.length-5],crashDataMassive[crashDataMassive.length-6]]
+          console.log(outputData)
+
+          let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
+          console.log(CurrentDate)
 
 
           const status = new Discord.MessageEmbed()
@@ -200,7 +232,7 @@ let DownCount = 0
 // let DownDetectorAnswer = '✅Активен✅'
 // let SanitarAnswer = '📡Больше не работает📡'
 
-alertChannel.messages.fetch('906286753583882302').then(msg => {msg.edit('Монитор активен.') //
+alertChannel.messages.fetch('906286753583882302').then(msg => {msg.edit(outputData) //
 msg.edit(status)})
     }
     console.log(DownCount)
