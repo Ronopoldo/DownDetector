@@ -58,7 +58,7 @@ let StatusColor = '#22fa05'
 
 
 
-
+let CurrentDown = 0
 let RonobotCounter = 0
 let DownCount = 0
 
@@ -192,17 +192,26 @@ let DownCount = 0
     if ((RSLastStatus1 != RSLastStatus) || (DJLastStatus1 !=DJLastStatus) || (ZelenskyLastStatus1 != ZelenskyLastStatus) || (RonobotLastStatus1 != RonobotLastStatus) || (CyalmLastStatus1 != CyalmLastStatus))
     {
 
-          if (DownCount == 0) {StatusCountMSG = '✅На данный момент сбоев не наблюдается✅'
+      CurrentDown = 0
+      if (RSLastStatus == false) { CurrentDown = CurrentDown + 1}
+      if (DJLastStatus == false) { CurrentDown = CurrentDown + 1}
+      if (ZelenskyLastStatus == false) { CurrentDown = CurrentDown + 1}
+      if (RonobotLastStatus == false) { CurrentDown = CurrentDown + 1}
+      if (CyalmLastStatus == false) { CurrentDown = CurrentDown + 1}
+
+
+
+          if (CurrentDown == 0) {StatusCountMSG = '✅На данный момент сбоев не наблюдается✅'
           StatusColor = '#22fa05'}
-          if (DownCount == 1) {StatusCountMSG = '⚡Обнаружен сбой в работе одного сервиса⚡'
+          if (CurrentDown == 1) {StatusCountMSG = '⚡Обнаружен сбой в работе одного сервиса⚡'
           StatusColor = '#a8fe00'}
-          if (DownCount == 2) {StatusCountMSG = '⚠Обнаружен сбой в работе двух сервисов⚠'
+          if (CurrentDown == 2) {StatusCountMSG = '⚠Обнаружен сбой в работе двух сервисов⚠'
           StatusColor = '#f5fd00'}
-          if (DownCount == 3) {StatusCountMSG = '⛔Обнаружен сбой в работе трёх сервисов⛔'
+          if (CurrentDown == 3) {StatusCountMSG = '⛔Обнаружен сбой в работе трёх сервисов⛔'
           StatusColor = '#fe0d01'}
-          if (DownCount == 4) {StatusCountMSG = '🔥Обнаружен сбой в работе четырёх сервисов🔥'
+          if (CurrentDown == 4) {StatusCountMSG = '🔥Обнаружен сбой в работе четырёх сервисов🔥'
           StatusColor = '#b902fd'}
-          if (DownCount == 5) {StatusCountMSG = '🪦Обнаружен сбой в работе всех сервисов (гг)🪦'
+          if (CurrentDown == 5) {StatusCountMSG = '🪦Обнаружен сбой в работе всех сервисов (гг)🪦'
           StatusColor = '#000000'}
 
           let crashData = fs.readFileSync(logPath, "utf8");
