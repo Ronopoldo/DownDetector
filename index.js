@@ -84,7 +84,7 @@ let DownCount = 0
             RonobotCounter = 0
             DownCount = DownCount + 1
             let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
+            fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
       }
 
       if ((member.user.presence.status !== 'offline') && RonobotLastStatus == false)
@@ -94,7 +94,7 @@ let DownCount = 0
             RonobotCounter = 0
             DownCount = DownCount - 1
                         let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
+                        fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -110,7 +110,7 @@ let DownCount = 0
             ZelenskyLastStatus = false
             DownCount = DownCount + 1
             let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
+            fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
       }
 
       if ((member.user.presence.status !== 'offline') && ZelenskyLastStatus == false)
@@ -119,7 +119,7 @@ let DownCount = 0
             ZelenskyLastStatus = true
             DownCount = DownCount - 1
                         let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
+                        fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -134,7 +134,7 @@ let DownCount = 0
             CyalmLastStatus = false
             DownCount = DownCount + 1
                         let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
+            fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
                       }
       if ((member.user.presence.status !== 'offline') && CyalmLastStatus == false)
       {
@@ -142,7 +142,7 @@ let DownCount = 0
             CyalmLastStatus = true
             DownCount = DownCount - 1
                         let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
+                        fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -157,14 +157,15 @@ let DownCount = 0
             DJLastStatus = false
             DownCount = DownCount + 1
                         let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
+            fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
                 }
       if ((member.user.presence.status !== 'offline') && DJLastStatus == false)
       {
             DJAnswer = '✅Активен✅'
             DJLastStatus = true
             DownCount = DownCount - 1
-                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON();
+                        fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
@@ -176,7 +177,7 @@ let DownCount = 0
             RSLastStatus = false
             DownCount = DownCount + 1
             let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON(); 
-            fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
+            fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' has stopped working! Error code: 502`\n', err => {});
             console.log('ЫГГЫЫГЫ')
                 }
       if ((member.user.presence.status != 'offline') && DJLastStatus == false)
@@ -185,7 +186,8 @@ let DownCount = 0
             RSManagerAnswer = '✅Активен✅'
             RSLastStatus = true
             DownCount = DownCount - 1
-                        fs.appendFile(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
+                        let CurrentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"})).toJSON();
+                        fs.appendFileSync(logPath, '`[' + CurrentDate + '] ' + member.user.tag + ' is online.`\n', err => {});
       }
     })
 
